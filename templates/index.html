@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Task Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Task Manager</h1>
+
+    <p class="subtitle">
+        CSI2113 DevOps Practical Assessment
+    </p>
+
+    <form action="/add" method="POST" class="task-form">
+        <input
+            type="text"
+            name="title"
+            placeholder="Enter a new task"
+            required
+        >
+
+        <button type="submit">Add Task</button>
+    </form>
+
+    <h2>My Tasks</h2>
+
+    {% if tasks %}
+
+        <ul class="task-list">
+
+            {% for task in tasks %}
+
+            <li class="{% if task.completed %}completed{% endif %}">
+
+                <span>{{ task.title }}</span>
+
+                <div>
+
+                    {% if not task.completed %}
+                    <a href="/complete/{{ task.id }}">
+                        <button type="button">Complete</button>
+                    </a>
+                    {% endif %}
+
+                    <a href="/delete/{{ task.id }}">
+                        <button type="button">Delete</button>
+                    </a>
+
+                </div>
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% else %}
+
+        <p>No tasks available.</p>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
