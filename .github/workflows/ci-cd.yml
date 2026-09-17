@@ -62,11 +62,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
       - name: Pull Updated Docker Image
+        shell: cmd
         run: |
           docker compose pull
 
       - name: Deploy Application
+        shell: cmd
         run: |
           docker compose up -d
