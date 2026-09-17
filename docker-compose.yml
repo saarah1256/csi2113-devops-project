@@ -1,5 +1,6 @@
 services:
   web:
-    build: .
+    image: 20070123/csi2113-web:latest
     ports:
       - "5000:5000"
+    restart: unless-stopped
